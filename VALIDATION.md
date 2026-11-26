@@ -14,7 +14,7 @@ Date: 2026-11-11 (Asia/Shanghai).
 | Binary LuaRocks package | Built, installed in a clean Kong container, and required modules loaded |
 | DataKit 2.17.1 Pipeline | Original millisecond timestamp, numeric status, log level, path, JSON header string, and original message verified |
 | Python test scripts | Syntax compilation passed |
-| GitHub Actions | Unit tests, both Kong integration jobs, lint and packaging passed for the initial public source commit; [run 43149282378](https://github.com/GuanceCloud/kong-plugin-guance-log/actions/runs/43149282378) |
+| GitHub Actions | Unit tests, both Kong integration jobs, lint and packaging passed for the initial public source commit; [run 43149282378](https://github.com/GuanceCloud/kong-plugin-datakit-log/actions/runs/43149282378) |
 
 Integration checks include:
 

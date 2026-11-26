@@ -25,7 +25,7 @@ For a Linux host installation, you can download the release version directly:
 
 ```sh
 curl --fail --location --output /usr/local/datakit/pipeline/guance-log.p \
-  https://raw.githubusercontent.com/GuanceCloud/kong-plugin-guance-log/v0.1.0/examples/datakit/guance-log.p
+  https://raw.githubusercontent.com/GuanceCloud/kong-plugin-datakit-log/v0.1.0/examples/datakit/guance-log.p
 datakit service restart
 ```
 

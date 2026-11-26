@@ -1,8 +1,11 @@
-# Guance Log for Kong Gateway
+# kong-plugin-datakit-log
 
 [简体中文](README.zh-CN.md)
 
 Send Kong HTTP access logs to Guance through **DataKit Log Streaming**.
+The project is named `kong-plugin-datakit-log` after its DataKit Log Streaming receiver.
+The published v0.1.0 LuaRocks package remains `kong-plugin-guance-log`, and the Kong plugin name remains `guance-log`; existing installation commands and configurations continue to apply.
+
 Plugin name: `guance-log`. Tested with Kong Gateway **3.9.1 and 3.9.4**.
 
 ```text
@@ -26,7 +29,7 @@ Kong → DataKit Log Streaming → Guance logs
 Install the complete package directly from the GitHub Release:
 
 ```sh
-luarocks install https://github.com/GuanceCloud/kong-plugin-guance-log/releases/download/v0.1.0/kong-plugin-guance-log-0.1.0-1.all.rock
+luarocks install https://github.com/GuanceCloud/kong-plugin-datakit-log/releases/download/v0.1.0/kong-plugin-guance-log-0.1.0-1.all.rock
 ```
 
 No separate rockspec download or source compilation is needed. This package is
@@ -147,7 +150,7 @@ curl --fail-with-body -X POST http://localhost:8001/consumers/example-consumer/p
 ## Offline installation
 
 Download `kong-plugin-guance-log-0.1.0-1.all.rock` and `SHA256SUMS` from
-[v0.1.0](https://github.com/GuanceCloud/kong-plugin-guance-log/releases/tag/v0.1.0).
+[v0.1.0](https://github.com/GuanceCloud/kong-plugin-datakit-log/releases/tag/v0.1.0).
 Copy them into the Kong environment, verify the package against its SHA-256
 entry, and install:
 

@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+- Rename the repository to `kong-plugin-datakit-log` to reflect its DataKit Log Streaming receiver.
+- Preserve the v0.1.0 package, plugin configuration name, and release assets for compatibility.
+
 ## v0.1.0 — 2026-11-12
 
 Initial release of the `guance-log` Kong Gateway plugin.

@@ -2,7 +2,7 @@ package = "kong-plugin-guance-log"
 version = "0.1.0-1"
 -- Versioned source is pinned to the corresponding release tag.
 source = {
-  url = "git+https://github.com/GuanceCloud/kong-plugin-guance-log.git",
+  url = "git+https://github.com/GuanceCloud/kong-plugin-datakit-log.git",
   tag = "v0.1.0",
 }
 description = {

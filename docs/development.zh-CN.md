@@ -9,8 +9,8 @@
 获取版本源码，然后在 Kong 环境安装：
 
 ```sh
-git clone --branch v0.1.0 --depth 1 https://github.com/GuanceCloud/kong-plugin-guance-log.git
-cd kong-plugin-guance-log
+git clone --branch v0.1.0 --depth 1 https://github.com/GuanceCloud/kong-plugin-datakit-log.git
+cd kong-plugin-datakit-log
 luarocks make kong-plugin-guance-log-0.1.0-1.rockspec
 ```
 
@@ -35,7 +35,7 @@ FROM kong:3.9.4
 USER root
 RUN apt-get update \
     && apt-get install -y --no-install-recommends curl unzip ca-certificates \
-    && luarocks install https://github.com/GuanceCloud/kong-plugin-guance-log/releases/download/v0.1.0/kong-plugin-guance-log-0.1.0-1.all.rock \
+    && luarocks install https://github.com/GuanceCloud/kong-plugin-datakit-log/releases/download/v0.1.0/kong-plugin-guance-log-0.1.0-1.all.rock \
     && rm -rf /var/lib/apt/lists/*
 ENV KONG_PLUGINS=bundled,guance-log
 USER kong

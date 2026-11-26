@@ -1,8 +1,11 @@
-# Kong 观测云日志插件
+# kong-plugin-datakit-log
 
 [English](README.md)
 
 通过 **DataKit Log Streaming** 将 Kong HTTP 访问日志上报到观测云。
+项目以 DataKit Log Streaming 接收端命名为 `kong-plugin-datakit-log`。
+已发布的 v0.1.0 LuaRocks 包名仍为 `kong-plugin-guance-log`，Kong 插件名仍为 `guance-log`；现有安装命令和配置继续适用。
+
 插件名：`guance-log`，已验证 Kong Gateway **3.9.1 和 3.9.4**。
 
 ```text
@@ -26,7 +29,7 @@ Kong → DataKit Log Streaming → 观测云日志
 直接从 GitHub Release 安装完整安装包：
 
 ```sh
-luarocks install https://github.com/GuanceCloud/kong-plugin-guance-log/releases/download/v0.1.0/kong-plugin-guance-log-0.1.0-1.all.rock
+luarocks install https://github.com/GuanceCloud/kong-plugin-datakit-log/releases/download/v0.1.0/kong-plugin-guance-log-0.1.0-1.all.rock
 ```
 
 不需要单独下载 rockspec，也不需要编译源码。当前尚未上架 LuaRocks 仓库，
@@ -144,7 +147,7 @@ curl --fail-with-body -X POST http://localhost:8001/consumers/example-consumer/p
 
 ## 离线安装
 
-从 [v0.1.0 Release](https://github.com/GuanceCloud/kong-plugin-guance-log/releases/tag/v0.1.0)
+从 [v0.1.0 Release](https://github.com/GuanceCloud/kong-plugin-datakit-log/releases/tag/v0.1.0)
 下载 `kong-plugin-guance-log-0.1.0-1.all.rock` 和 `SHA256SUMS`，复制到 Kong 环境。
 根据校验文件核对安装包的 SHA-256 后执行：
 
