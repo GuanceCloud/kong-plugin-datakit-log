@@ -2,17 +2,17 @@
 
 [简体中文](README.zh-CN.md)
 
-Send Kong HTTP access logs to Guance through **DataKit Log Streaming**.
+Send Kong HTTP access logs to **DataKit Log Streaming**.
 
 Plugin name: `datakit-log`. Tested with Kong Gateway **3.9.1 and 3.9.4**.
 
 ```text
-Kong → DataKit Log Streaming → Guance logs
+Kong → DataKit Log Streaming
 ```
 
 ## Before you start
 
-- Have a DataKit connected to your Guance workspace. Enable Log Streaming and
+- Have a reachable DataKit instance with log forwarding configured. Enable Log Streaming and
   install `kong-log.p` using the [DataKit setup guide](docs/datakit.md).
 - Run installation commands in your Kong environment with LuaRocks, `curl` or
   `wget`, `unzip`, and permission to install Lua modules. Ubuntu/Debian download
@@ -96,7 +96,7 @@ A complete example is in [examples/kong.yml](examples/kong.yml).
    curl -i http://localhost:8000/your-route
    ```
 
-3. In Guance **Logs**, select the DataKit workspace and a recent time range.
+3. In the log backend configured for DataKit, select a recent time range.
    Filter by `source=kong` and `service=api-gateway`. After normal batching and
    forwarding delays, check `http_path`, `http_status`, and `request_id`.
 
@@ -114,7 +114,7 @@ For database-backed Kong, use these endpoints with the configuration in step 3:
 | Route | `POST /routes/{route}/plugins` | Requests matching that Route |
 | Consumer | `POST /consumers/{consumer}/plugins` | Requests authenticated as that Consumer |
 
-`config.service` is a Guance service tag; the entity you attach the plugin to
+`config.service` is the log record's service tag; the entity you attach the plugin to
 determines its scope. For example, log only the Service named `example-api`:
 
 ```sh

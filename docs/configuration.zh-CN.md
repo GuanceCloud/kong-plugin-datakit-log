@@ -47,4 +47,4 @@
   Lua 对象开销，且随 worker 和插件实例数量增加；不保证不丢失或恰好一次投递。
 - 插件丢弃日志按原因累计，每个 worker 每 60 秒最多在下一次同类事件时输出一次诊断；
   Kong 队列另行输出容量及重试耗尽诊断，目前没有独立指标接口。
-- DataKit 的 HTTP 2xx 仅表示接收，不表示观测云已入库，需同时检查 DataKit 转发和 Pipeline。
+- DataKit 的 HTTP 2xx 仅表示接收，不表示日志存储端已成功入库，需同时检查 DataKit 转发和 Pipeline。

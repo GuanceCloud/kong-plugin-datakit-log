@@ -8,7 +8,7 @@ Date: 2026-11-11 (Asia/Shanghai).
 - Full integration suite passed on Kong 3.9.4 with two workers, including the renamed plugin and Pipeline parameter.
 - Installed Docker image integration suite and the rebuilt binary LuaRocks package passed installation/loading checks.
 - The renamed Pipeline passed the actual DataKit field and timestamp checks.
-- No `guance-log` runtime alias or legacy module directory is provided.
+- The runtime namespace is `datakit-log`; no legacy alias is provided.
 
 ## Historical v0.1.0 checks
 
@@ -41,7 +41,7 @@ binary in a network-disabled container with no host configuration or credentials
 
 ## Not verified
 
-- End-to-end storage in a real Guance workspace, dashboard queries, or workspace-specific indexes.
+- End-to-end storage in the configured log backend, dashboard queries, or backend-specific indexes.
 - Full live DataKit forwarding to DataWay; the standalone Pipeline check validates
   field/time parsing, not the entire ingestion path.
 - Kong versions outside the tested 3.9.x images, traditional/hybrid topology, or Konnect.

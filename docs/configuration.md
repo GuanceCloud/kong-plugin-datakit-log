@@ -85,5 +85,5 @@ only fields you intend to collect. Values inside paths are not redacted.
 - Plugin-generated drops are counted and reported at most once per reason per
   60 seconds per worker, on the next occurrence. Kong separately reports queue
   capacity and retry-exhaustion losses. There is no public metrics endpoint yet.
-- HTTP 2xx acknowledges DataKit acceptance, not successful Guance storage. DataKit
+- HTTP 2xx acknowledges DataKit acceptance, not successful storage in the configured log backend. DataKit
   forwarding, Pipeline errors, and workspace ingestion must be monitored separately.

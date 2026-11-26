@@ -2,7 +2,7 @@
 
 [快速开始](../README.zh-CN.md) · [English](datakit.md)
 
-以下是已连接观测云工作空间的 DataKit 的一次性准备步骤。路径以 Linux 安装目录
+以下是 DataKit Log Streaming 接收端的一次性准备步骤。路径以 Linux 安装目录
 `/usr/local/datakit` 为例，按实际安装位置调整，并使用相应文件及服务管理权限。
 
 ## 启用采集器

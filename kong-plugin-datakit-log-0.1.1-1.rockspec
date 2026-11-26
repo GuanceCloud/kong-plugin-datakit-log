@@ -6,7 +6,7 @@ source = {
   tag = "v0.1.1",
 }
 description = {
-  summary = "Send Kong access logs to Guance through DataKit Log Streaming",
+  summary = "Send Kong access logs to DataKit Log Streaming",
   license = "Apache-2.0",
 }
 dependencies = { "lua >= 5.1, < 5.5" }

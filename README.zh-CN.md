@@ -2,12 +2,12 @@
 
 [English](README.md)
 
-通过 **DataKit Log Streaming** 将 Kong HTTP 访问日志上报到观测云。
+将 Kong HTTP 访问日志发送到 **DataKit Log Streaming**。
 
 插件名：`datakit-log`，已验证 Kong Gateway **3.9.1 和 3.9.4**。
 
 ```text
-Kong → DataKit Log Streaming → 观测云日志
+Kong → DataKit Log Streaming
 ```
 
 ## 开始之前
@@ -94,7 +94,7 @@ plugins:
    curl -i http://localhost:8000/your-route
    ```
 
-3. 在观测云 **日志** 中选择 DataKit 对应工作空间和最近时间范围，筛选
+3. 在 DataKit 配置的日志存储端选择最近时间范围，筛选
    `source=kong`、`service=api-gateway`。等待正常批量发送及转发延迟后，检查
    `http_path`、`http_status`、`request_id` 等字段。
 
@@ -112,7 +112,7 @@ plugins:
 | Route | `POST /routes/{route}/plugins` | 匹配指定 Route 的请求 |
 | Consumer | `POST /consumers/{consumer}/plugins` | 认证为指定 Consumer 的请求 |
 
-`config.service` 是观测云服务标签，真正的作用域由插件挂载位置决定。
+`config.service` 是日志记录中的服务标签，真正的作用域由插件挂载位置决定。
 例如，仅采集名为 `example-api` 的 Service：
 
 ```sh
@@ -178,6 +178,6 @@ luarocks install ./kong-plugin-datakit-log-0.1.1-1.all.rock
 - [变更记录](CHANGELOG.md) · [验证范围](VALIDATION.md)
 
 队列位于内存中。本版不提供 DataWay 直连、Trace 导出及进程错误日志采集。
-传统/混合部署、Konnect 和真实观测云工作空间入库尚未验证。
+传统/混合部署、Konnect 和实际日志存储端的完整入库链路尚未验证。
 
 采用 [Apache License 2.0](LICENSE)。

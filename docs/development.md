@@ -64,7 +64,7 @@ URLs, and changelog together. Keep the release tag pinned to the validated commi
 ## Development and tests
 
 Requires Docker and Python 3.9+. The black-box suite uses Linux host networking,
-random loopback ports, and an HTTP receiver fixture; no Guance token is needed.
+random loopback ports, and an HTTP receiver fixture; no backend credentials are needed.
 It removes its own containers and temporary files on completion.
 
 ```sh
@@ -85,4 +85,4 @@ python3 spec/datakit_pipeline.py --binary /usr/local/datakit/datakit
 
 This check mounts only the binary and sample Pipeline in a network-disabled
 container. It does not read or change your host DataKit configuration.
-Actual Guance workspace ingestion requires a separate deployment test.
+End-to-end ingestion into the configured log backend requires a separate deployment test.

@@ -2,7 +2,7 @@
 
 [Quick start](../README.md) · [简体中文](datakit.zh-CN.md)
 
-This is a one-time setup for a DataKit already connected to your Guance workspace.
+This is a one-time setup for the DataKit Log Streaming receiver.
 The example paths below use the Linux installation directory `/usr/local/datakit`.
 Use your actual installation paths and appropriate file permissions.
 

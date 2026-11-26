@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Describe the plugin as a DataKit Log Streaming sender without backend product branding.
+
 - Rename the DataKit Pipeline file and all configuration examples to `kong-log.p`.
 
 ## v0.1.1 — 2026-11-26
@@ -11,7 +13,7 @@
 
 ## v0.1.0 — 2026-11-12
 
-Initial release of the plugin (named `guance-log` at that time).
+Initial release of the plugin.
 
 ### Features
 
@@ -39,5 +41,5 @@ Initial release of the plugin (named `guance-log` at that time).
 - No standalone tracing exporter or Kong/Nginx process error-log collection.
 - Queues are in memory; crashes can lose logs and ambiguous acknowledgements can cause duplicates.
 - Traditional/hybrid topology, Konnect, other Kong versions, sustained load and
-  end-to-end ingestion into a real Guance workspace have not been verified.
+  end-to-end ingestion into the configured log backend have not been verified.
 - Distributed through GitHub Releases; not published to the LuaRocks registry or Kong Plugin Hub.
