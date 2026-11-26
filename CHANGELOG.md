@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Rename the DataKit Pipeline file and all configuration examples to `kong-log.p`.
+
 ## v0.1.1 — 2026-11-26
 
 - Rename the repository to `kong-plugin-datakit-log` to reflect its DataKit Log Streaming receiver.

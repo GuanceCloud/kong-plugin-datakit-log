@@ -11,7 +11,7 @@ All fields are under `config`.
 | `endpoint` | required | HTTP(S) origin or full `/v1/write/logstreaming` URL; no credentials, query, or fragment |
 | `source` | `kong` | DataKit log source |
 | `service` | `kong` | Observability service tag; independent of the Kong Service entity name |
-| `pipeline` | unset | DataKit Pipeline name, e.g. `datakit-log.p` |
+| `pipeline` | unset | DataKit Pipeline name, e.g. `kong-log.p` |
 | `storage_index` | unset | Log index; lowercase letter followed by lowercase letters, digits, or underscores |
 | `tags` | `{}` | String tags; values cannot contain commas, equals signs, or control characters |
 | `request_headers_allowlist` | `[]` | Request headers to include, matched case-insensitively |

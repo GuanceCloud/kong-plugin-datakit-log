@@ -13,7 +13,7 @@ Kong → DataKit Log Streaming → 观测云日志
 ## 开始之前
 
 - 已有连接到目标工作空间的 DataKit。按 [DataKit 配置说明](docs/datakit.zh-CN.md)
-  开启 Log Streaming，并安装配套 `datakit-log.p` Pipeline。
+  开启 Log Streaming，并安装配套 `kong-log.p` Pipeline。
 - 在 Kong 运行环境中执行安装命令，需要 LuaRocks、`curl` 或 `wget`、`unzip`，以及
   安装 Lua 模块的权限。Ubuntu/Debian 下载依赖：
   `apt-get update && apt-get install -y curl unzip`。
@@ -62,7 +62,7 @@ curl --fail-with-body -X POST http://localhost:8001/plugins \
   --data 'name=datakit-log' \
   --data 'config.endpoint=http://datakit:9529' \
   --data 'config.service=api-gateway' \
-  --data 'config.pipeline=datakit-log.p'
+  --data 'config.pipeline=kong-log.p'
 ```
 
 **DB-less 模式：合并到声明式配置**
@@ -74,7 +74,7 @@ plugins:
     config:
       endpoint: http://datakit:9529
       service: api-gateway
-      pipeline: datakit-log.p
+      pipeline: kong-log.p
 ```
 
 保留已有 Service 和 Route，通过现有部署流程重新加载配置。DB-less 模式不能使用
@@ -120,7 +120,7 @@ curl --fail-with-body -X POST http://localhost:8001/services/example-api/plugins
   --data 'name=datakit-log' \
   --data 'config.endpoint=http://datakit:9529' \
   --data 'config.service=example-api' \
-  --data 'config.pipeline=datakit-log.p'
+  --data 'config.pipeline=kong-log.p'
 ```
 
 <details>
@@ -133,12 +133,12 @@ Consumer 作用域需要配合能够识别 Consumer 的认证插件。
 curl --fail-with-body -X POST http://localhost:8001/routes/example-route/plugins \
   --data 'name=datakit-log' \
   --data 'config.endpoint=http://datakit:9529' \
-  --data 'config.pipeline=datakit-log.p'
+  --data 'config.pipeline=kong-log.p'
 
 curl --fail-with-body -X POST http://localhost:8001/consumers/example-consumer/plugins \
   --data 'name=datakit-log' \
   --data 'config.endpoint=http://datakit:9529' \
-  --data 'config.pipeline=datakit-log.p'
+  --data 'config.pipeline=kong-log.p'
 ```
 
 </details>
@@ -164,7 +164,7 @@ luarocks install ./kong-plugin-datakit-log-0.1.1-1.all.rock
 | `enabled_plugins` 中没有插件 | 检查 `plugins` / `KONG_PLUGINS`，重启或重新部署 |
 | Admin API 写入返回 405 | DB-less 部署应使用声明式配置 |
 | 请求正常，但看不到日志 | 检查实例作用域、Kong 到 DataKit 的连通性和 DataKit 转发/错误日志 |
-| JSON 只有 `message`，没有独立字段 | 安装 `datakit-log.p` 并设置 `config.pipeline=datakit-log.p`，参见 [DataKit 配置](docs/datakit.zh-CN.md) |
+| JSON 只有 `message`，没有独立字段 | 安装 `kong-log.p` 并设置 `config.pipeline=kong-log.p`，参见 [DataKit 配置](docs/datakit.zh-CN.md) |
 | 容器访问不到 `127.0.0.1:9529` | 使用可达的 DataKit 主机/服务地址，回环地址指向容器自身 |
 
 ## 更多配置

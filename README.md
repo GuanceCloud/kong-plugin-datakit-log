@@ -13,7 +13,7 @@ Kong → DataKit Log Streaming → Guance logs
 ## Before you start
 
 - Have a DataKit connected to your Guance workspace. Enable Log Streaming and
-  install `datakit-log.p` using the [DataKit setup guide](docs/datakit.md).
+  install `kong-log.p` using the [DataKit setup guide](docs/datakit.md).
 - Run installation commands in your Kong environment with LuaRocks, `curl` or
   `wget`, `unzip`, and permission to install Lua modules. Ubuntu/Debian download
   dependencies: `apt-get update && apt-get install -y curl unzip`.
@@ -63,7 +63,7 @@ curl --fail-with-body -X POST http://localhost:8001/plugins \
   --data 'name=datakit-log' \
   --data 'config.endpoint=http://datakit:9529' \
   --data 'config.service=api-gateway' \
-  --data 'config.pipeline=datakit-log.p'
+  --data 'config.pipeline=kong-log.p'
 ```
 
 **DB-less Kong: merge into your declarative configuration**
@@ -75,7 +75,7 @@ plugins:
     config:
       endpoint: http://datakit:9529
       service: api-gateway
-      pipeline: datakit-log.p
+      pipeline: kong-log.p
 ```
 
 Keep your existing Services/Routes and reload through your normal deployment
@@ -122,7 +122,7 @@ curl --fail-with-body -X POST http://localhost:8001/services/example-api/plugins
   --data 'name=datakit-log' \
   --data 'config.endpoint=http://datakit:9529' \
   --data 'config.service=example-api' \
-  --data 'config.pipeline=datakit-log.p'
+  --data 'config.pipeline=kong-log.p'
 ```
 
 <details>
@@ -135,12 +135,12 @@ authentication plugin that identifies the Consumer.
 curl --fail-with-body -X POST http://localhost:8001/routes/example-route/plugins \
   --data 'name=datakit-log' \
   --data 'config.endpoint=http://datakit:9529' \
-  --data 'config.pipeline=datakit-log.p'
+  --data 'config.pipeline=kong-log.p'
 
 curl --fail-with-body -X POST http://localhost:8001/consumers/example-consumer/plugins \
   --data 'name=datakit-log' \
   --data 'config.endpoint=http://datakit:9529' \
-  --data 'config.pipeline=datakit-log.p'
+  --data 'config.pipeline=kong-log.p'
 ```
 
 </details>
@@ -167,7 +167,7 @@ Then continue with steps 2–4. Other Release files are for source builds.
 | Plugin absent from `enabled_plugins` | Check `plugins` / `KONG_PLUGINS` and restart/redeploy |
 | Admin API write returns 405 | Use declarative configuration for DB-less deployments |
 | Requests work but no logs appear | Check instance scope, Kong-to-DataKit connectivity, and DataKit forwarding/error logs |
-| JSON appears only in `message` | Install `datakit-log.p` and set `config.pipeline=datakit-log.p`; see [DataKit setup](docs/datakit.md) |
+| JSON appears only in `message` | Install `kong-log.p` and set `config.pipeline=kong-log.p`; see [DataKit setup](docs/datakit.md) |
 | Container cannot reach `127.0.0.1:9529` | Use a reachable DataKit host/service address; loopback belongs to the container |
 
 ## Configuration

@@ -1,4 +1,4 @@
-# Install under <DataKit>/pipeline/datakit-log.p.
+# Install under <DataKit>/pipeline/kong-log.p.
 # Keep json_as_fields=false so this script receives the original JSON message.
 json(_, schema_version)
 json(_, timestamp_ms)

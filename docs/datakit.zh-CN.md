@@ -18,12 +18,12 @@
 
 ## 安装 Pipeline
 
-将 [datakit-log.p](../examples/datakit/datakit-log.p) 复制到
-`<DataKit>/pipeline/datakit-log.p`。Linux 主机安装可直接下载版本文件：
+将 [kong-log.p](../examples/datakit/kong-log.p) 复制到
+`<DataKit>/pipeline/kong-log.p`。Linux 主机安装可直接下载版本文件：
 
 ```sh
-curl --fail --location --output /usr/local/datakit/pipeline/datakit-log.p \
-  https://raw.githubusercontent.com/GuanceCloud/kong-plugin-datakit-log/v0.1.1/examples/datakit/datakit-log.p
+curl --fail --location --output /usr/local/datakit/pipeline/kong-log.p \
+  https://github.com/GuanceCloud/kong-plugin-datakit-log/releases/download/v0.1.1/kong-log.p
 datakit service restart
 ```
 

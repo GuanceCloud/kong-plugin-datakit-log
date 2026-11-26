@@ -29,7 +29,7 @@ for sample in samples:
         "-v", f"{binary}:/usr/local/datakit/datakit:ro",
         "-v", f"{root / 'examples/datakit'}:/usr/local/datakit/pipeline:ro",
         "--entrypoint", "/usr/local/datakit/datakit", args.image,
-        "pipeline", "-P", "datakit-log.p", "-T", json.dumps(sample),
+        "pipeline", "-P", "kong-log.p", "-T", json.dumps(sample),
     ], text=True, stderr=subprocess.PIPE)
     result, _ = json.JSONDecoder().raw_decode(output[output.index("{"):])
     assert result["time"] == sample["timestamp_ms"] * 1000000, result

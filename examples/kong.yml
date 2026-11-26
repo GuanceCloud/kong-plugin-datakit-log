@@ -11,7 +11,7 @@ plugins:
       endpoint: http://datakit:9529
       source: kong
       service: api-gateway
-      pipeline: datakit-log.p
+      pipeline: kong-log.p
       tags:
         env: production
       queue:

@@ -131,7 +131,7 @@ def main():
             "endpoint": f"http://127.0.0.1:{receiver_port}",
             "source": source, "service": "gateway",
             "tags": {"env": "test", "team": "研发 space"},
-            "pipeline": "datakit-log.p", "storage_index": "gateway_logs",
+            "pipeline": "kong-log.p", "storage_index": "gateway_logs",
             "request_headers_allowlist": ["x-allowed"],
             "response_headers_allowlist": ["content-type"],
             "queue": {"max_batch_size": 1, "max_coalescing_delay": 0.2,
@@ -200,7 +200,7 @@ def main():
                 assert event["body"].endswith(b"\n")
                 assert event["content_type"].startswith("text/plain")
                 assert event["query"]["tags"] == ["env=test,team=研发 space"]
-                assert event["query"]["pipeline"] == ["datakit-log.p"]
+                assert event["query"]["pipeline"] == ["kong-log.p"]
                 assert event["query"]["storage_index"] == ["gateway_logs"]
                 assert b"secret" not in event["body"]
             assert len({record["request_id"] for record in records("batch")}) == 30
