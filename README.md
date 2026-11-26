@@ -3,10 +3,8 @@
 [简体中文](README.zh-CN.md)
 
 Send Kong HTTP access logs to Guance through **DataKit Log Streaming**.
-The project is named `kong-plugin-datakit-log` after its DataKit Log Streaming receiver.
-The published v0.1.0 LuaRocks package remains `kong-plugin-guance-log`, and the Kong plugin name remains `guance-log`; existing installation commands and configurations continue to apply.
 
-Plugin name: `guance-log`. Tested with Kong Gateway **3.9.1 and 3.9.4**.
+Plugin name: `datakit-log`. Tested with Kong Gateway **3.9.1 and 3.9.4**.
 
 ```text
 Kong → DataKit Log Streaming → Guance logs
@@ -15,7 +13,7 @@ Kong → DataKit Log Streaming → Guance logs
 ## Before you start
 
 - Have a DataKit connected to your Guance workspace. Enable Log Streaming and
-  install `guance-log.p` using the [DataKit setup guide](docs/datakit.md).
+  install `datakit-log.p` using the [DataKit setup guide](docs/datakit.md).
 - Run installation commands in your Kong environment with LuaRocks, `curl` or
   `wget`, `unzip`, and permission to install Lua modules. Ubuntu/Debian download
   dependencies: `apt-get update && apt-get install -y curl unzip`.
@@ -29,7 +27,7 @@ Kong → DataKit Log Streaming → Guance logs
 Install the complete package directly from the GitHub Release:
 
 ```sh
-luarocks install https://github.com/GuanceCloud/kong-plugin-datakit-log/releases/download/v0.1.0/kong-plugin-guance-log-0.1.0-1.all.rock
+luarocks install https://github.com/GuanceCloud/kong-plugin-datakit-log/releases/download/v0.1.1/kong-plugin-datakit-log-0.1.1-1.all.rock
 ```
 
 No separate rockspec download or source compilation is needed. This package is
@@ -38,10 +36,10 @@ not yet in the LuaRocks registry. For offline environments, see
 
 ### 2. Load the plugin
 
-Add `guance-log` to `kong.conf`, keeping other custom plugins already listed:
+Add `datakit-log` to `kong.conf`, keeping other custom plugins already listed:
 
 ```ini
-plugins = bundled,guance-log
+plugins = bundled,datakit-log
 ```
 
 Restart Kong:
@@ -50,7 +48,7 @@ Restart Kong:
 kong restart
 ```
 
-In containers, set `KONG_PLUGINS=bundled,guance-log` in the deployment and roll out
+In containers, set `KONG_PLUGINS=bundled,datakit-log` in the deployment and roll out
 an image containing the plugin. Install the same version on every applicable node.
 
 ### 3. Enable logging
@@ -62,10 +60,10 @@ the DataKit address **reachable from Kong**.
 
 ```sh
 curl --fail-with-body -X POST http://localhost:8001/plugins \
-  --data 'name=guance-log' \
+  --data 'name=datakit-log' \
   --data 'config.endpoint=http://datakit:9529' \
   --data 'config.service=api-gateway' \
-  --data 'config.pipeline=guance-log.p'
+  --data 'config.pipeline=datakit-log.p'
 ```
 
 **DB-less Kong: merge into your declarative configuration**
@@ -73,11 +71,11 @@ curl --fail-with-body -X POST http://localhost:8001/plugins \
 ```yaml
 _format_version: "3.0"
 plugins:
-  - name: guance-log
+  - name: datakit-log
     config:
       endpoint: http://datakit:9529
       service: api-gateway
-      pipeline: guance-log.p
+      pipeline: datakit-log.p
 ```
 
 Keep your existing Services/Routes and reload through your normal deployment
@@ -86,7 +84,7 @@ A complete example is in [examples/kong.yml](examples/kong.yml).
 
 ### 4. Verify
 
-1. Check that `guance-log` appears in `enabled_plugins`:
+1. Check that `datakit-log` appears in `enabled_plugins`:
 
    ```sh
    curl --fail --silent --show-error http://localhost:8001/plugins/enabled
@@ -121,10 +119,10 @@ determines its scope. For example, log only the Service named `example-api`:
 
 ```sh
 curl --fail-with-body -X POST http://localhost:8001/services/example-api/plugins \
-  --data 'name=guance-log' \
+  --data 'name=datakit-log' \
   --data 'config.endpoint=http://datakit:9529' \
   --data 'config.service=example-api' \
-  --data 'config.pipeline=guance-log.p'
+  --data 'config.pipeline=datakit-log.p'
 ```
 
 <details>
@@ -135,27 +133,27 @@ authentication plugin that identifies the Consumer.
 
 ```sh
 curl --fail-with-body -X POST http://localhost:8001/routes/example-route/plugins \
-  --data 'name=guance-log' \
+  --data 'name=datakit-log' \
   --data 'config.endpoint=http://datakit:9529' \
-  --data 'config.pipeline=guance-log.p'
+  --data 'config.pipeline=datakit-log.p'
 
 curl --fail-with-body -X POST http://localhost:8001/consumers/example-consumer/plugins \
-  --data 'name=guance-log' \
+  --data 'name=datakit-log' \
   --data 'config.endpoint=http://datakit:9529' \
-  --data 'config.pipeline=guance-log.p'
+  --data 'config.pipeline=datakit-log.p'
 ```
 
 </details>
 
 ## Offline installation
 
-Download `kong-plugin-guance-log-0.1.0-1.all.rock` and `SHA256SUMS` from
-[v0.1.0](https://github.com/GuanceCloud/kong-plugin-datakit-log/releases/tag/v0.1.0).
+Download `kong-plugin-datakit-log-0.1.1-1.all.rock` and `SHA256SUMS` from
+[v0.1.1](https://github.com/GuanceCloud/kong-plugin-datakit-log/releases/tag/v0.1.1).
 Copy them into the Kong environment, verify the package against its SHA-256
 entry, and install:
 
 ```sh
-luarocks install ./kong-plugin-guance-log-0.1.0-1.all.rock
+luarocks install ./kong-plugin-datakit-log-0.1.1-1.all.rock
 ```
 
 Then continue with steps 2–4. Other Release files are for source builds.
@@ -169,7 +167,7 @@ Then continue with steps 2–4. Other Release files are for source builds.
 | Plugin absent from `enabled_plugins` | Check `plugins` / `KONG_PLUGINS` and restart/redeploy |
 | Admin API write returns 405 | Use declarative configuration for DB-less deployments |
 | Requests work but no logs appear | Check instance scope, Kong-to-DataKit connectivity, and DataKit forwarding/error logs |
-| JSON appears only in `message` | Install `guance-log.p` and set `config.pipeline=guance-log.p`; see [DataKit setup](docs/datakit.md) |
+| JSON appears only in `message` | Install `datakit-log.p` and set `config.pipeline=datakit-log.p`; see [DataKit setup](docs/datakit.md) |
 | Container cannot reach `127.0.0.1:9529` | Use a reachable DataKit host/service address; loopback belongs to the container |
 
 ## Configuration

@@ -20,12 +20,12 @@ configuration. Otherwise, create `<DataKit>/conf.d/log/logstreaming.conf` using
 
 ## Install the Pipeline
 
-Copy [guance-log.p](../examples/datakit/guance-log.p) to `<DataKit>/pipeline/guance-log.p`.
+Copy [datakit-log.p](../examples/datakit/datakit-log.p) to `<DataKit>/pipeline/datakit-log.p`.
 For a Linux host installation, you can download the release version directly:
 
 ```sh
-curl --fail --location --output /usr/local/datakit/pipeline/guance-log.p \
-  https://raw.githubusercontent.com/GuanceCloud/kong-plugin-datakit-log/v0.1.0/examples/datakit/guance-log.p
+curl --fail --location --output /usr/local/datakit/pipeline/datakit-log.p \
+  https://raw.githubusercontent.com/GuanceCloud/kong-plugin-datakit-log/v0.1.1/examples/datakit/datakit-log.p
 datakit service restart
 ```
 

@@ -10,9 +10,9 @@ by the [quick start](../README.md#install).
 Check out the release source, then install into your Kong environment:
 
 ```sh
-git clone --branch v0.1.0 --depth 1 https://github.com/GuanceCloud/kong-plugin-datakit-log.git
+git clone --branch v0.1.1 --depth 1 https://github.com/GuanceCloud/kong-plugin-datakit-log.git
 cd kong-plugin-datakit-log
-luarocks make kong-plugin-guance-log-0.1.0-1.rockspec
+luarocks make kong-plugin-datakit-log-0.1.1-1.rockspec
 ```
 
 Alternatively, unpack the Release source archive and run `luarocks make` in its
@@ -24,10 +24,10 @@ prerequisite for installing the complete `.all.rock` package.
 Build the supplied Dockerfile from the repository root:
 
 ```sh
-docker build --build-arg KONG_IMAGE=kong:3.9.4 -t kong-guance-log:0.1.0 .
+docker build --build-arg KONG_IMAGE=kong:3.9.4 -t kong-datakit-log:0.1.1 .
 ```
 
-It copies the modules into Kong and sets `KONG_PLUGINS=bundled,guance-log`.
+It copies the modules into Kong and sets `KONG_PLUGINS=bundled,datakit-log`.
 Use that image in your deployment and keep other existing custom plugins when
 overriding `KONG_PLUGINS`.
 
@@ -38,9 +38,9 @@ FROM kong:3.9.4
 USER root
 RUN apt-get update \
     && apt-get install -y --no-install-recommends curl unzip ca-certificates \
-    && luarocks install https://github.com/GuanceCloud/kong-plugin-datakit-log/releases/download/v0.1.0/kong-plugin-guance-log-0.1.0-1.all.rock \
+    && luarocks install https://github.com/GuanceCloud/kong-plugin-datakit-log/releases/download/v0.1.1/kong-plugin-datakit-log-0.1.1-1.all.rock \
     && rm -rf /var/lib/apt/lists/*
-ENV KONG_PLUGINS=bundled,guance-log
+ENV KONG_PLUGINS=bundled,datakit-log
 USER kong
 ```
 
@@ -54,10 +54,10 @@ plane and all data planes. Traditional/hybrid deployments have not been tested.
 The packaging environment needs `zip`:
 
 ```sh
-luarocks make --pack-binary-rock kong-plugin-guance-log-0.1.0-1.rockspec
+luarocks make --pack-binary-rock kong-plugin-datakit-log-0.1.1-1.rockspec
 ```
 
-The result is `kong-plugin-guance-log-0.1.0-1.all.rock`. Before a new release,
+The result is `kong-plugin-datakit-log-0.1.1-1.all.rock`. Before a new release,
 update the handler version, rockspec filename/version/source tag, installation
 URLs, and changelog together. Keep the release tag pinned to the validated commit.
 

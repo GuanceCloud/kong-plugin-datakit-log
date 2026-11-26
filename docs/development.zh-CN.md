@@ -9,9 +9,9 @@
 获取版本源码，然后在 Kong 环境安装：
 
 ```sh
-git clone --branch v0.1.0 --depth 1 https://github.com/GuanceCloud/kong-plugin-datakit-log.git
+git clone --branch v0.1.1 --depth 1 https://github.com/GuanceCloud/kong-plugin-datakit-log.git
 cd kong-plugin-datakit-log
-luarocks make kong-plugin-guance-log-0.1.0-1.rockspec
+luarocks make kong-plugin-datakit-log-0.1.1-1.rockspec
 ```
 
 也可以解压 Release 中的源码包，在根目录执行 `luarocks make`。
@@ -22,10 +22,10 @@ luarocks make kong-plugin-guance-log-0.1.0-1.rockspec
 在仓库根目录使用已有 Dockerfile 构建：
 
 ```sh
-docker build --build-arg KONG_IMAGE=kong:3.9.4 -t kong-guance-log:0.1.0 .
+docker build --build-arg KONG_IMAGE=kong:3.9.4 -t kong-datakit-log:0.1.1 .
 ```
 
-该镜像复制插件模块，并设置 `KONG_PLUGINS=bundled,guance-log`。
+该镜像复制插件模块，并设置 `KONG_PLUGINS=bundled,datakit-log`。
 在部署配置中使用该镜像，覆盖插件列表时保留已有的其他自定义插件。
 
 也可以在已有 Gateway Dockerfile 中安装 Release 包：
@@ -35,9 +35,9 @@ FROM kong:3.9.4
 USER root
 RUN apt-get update \
     && apt-get install -y --no-install-recommends curl unzip ca-certificates \
-    && luarocks install https://github.com/GuanceCloud/kong-plugin-datakit-log/releases/download/v0.1.0/kong-plugin-guance-log-0.1.0-1.all.rock \
+    && luarocks install https://github.com/GuanceCloud/kong-plugin-datakit-log/releases/download/v0.1.1/kong-plugin-datakit-log-0.1.1-1.all.rock \
     && rm -rf /var/lib/apt/lists/*
-ENV KONG_PLUGINS=bundled,guance-log
+ENV KONG_PLUGINS=bundled,datakit-log
 USER kong
 ```
 
@@ -50,10 +50,10 @@ USER kong
 打包环境需要 `zip`：
 
 ```sh
-luarocks make --pack-binary-rock kong-plugin-guance-log-0.1.0-1.rockspec
+luarocks make --pack-binary-rock kong-plugin-datakit-log-0.1.1-1.rockspec
 ```
 
-输出为 `kong-plugin-guance-log-0.1.0-1.all.rock`。发布新版本时，同步更新 handler 版本、
+输出为 `kong-plugin-datakit-log-0.1.1-1.all.rock`。发布新版本时，同步更新 handler 版本、
 rockspec 文件名/版本/源码 tag、安装链接和变更记录，并将 tag 固定到已验证提交。
 
 ## 开发验证

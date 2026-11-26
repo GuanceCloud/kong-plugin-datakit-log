@@ -6,12 +6,12 @@ services:
       - name: example-api
         paths: [/api]
 plugins:
-  - name: guance-log
+  - name: datakit-log
     config:
       endpoint: http://datakit:9529
       source: kong
       service: api-gateway
-      pipeline: guance-log.p
+      pipeline: datakit-log.p
       tags:
         env: production
       queue:

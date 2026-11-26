@@ -1,13 +1,13 @@
 # Changelog
 
-## Unreleased
+## v0.1.1 — 2026-11-26
 
 - Rename the repository to `kong-plugin-datakit-log` to reflect its DataKit Log Streaming receiver.
-- Preserve the v0.1.0 package, plugin configuration name, and release assets for compatibility.
+- Rename the LuaRocks package, Kong plugin/module namespace, Pipeline, Docker image, tests and examples to `datakit-log`; no legacy alias is provided.
 
 ## v0.1.0 — 2026-11-12
 
-Initial release of the `guance-log` Kong Gateway plugin.
+Initial release of the plugin (named `guance-log` at that time).
 
 ### Features
 

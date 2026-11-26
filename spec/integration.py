@@ -124,14 +124,14 @@ def main():
     proxy_port, admin_port = free_port(), free_port()
     proxy = f"http://127.0.0.1:{proxy_port}"
     admin = f"http://127.0.0.1:{admin_port}"
-    name = "guance-log-test-" + uuid.uuid4().hex[:12]
+    name = "datakit-log-test-" + uuid.uuid4().hex[:12]
     configuration = {"_format_version": "3.0", "services": []}
     for source in ("batch", "retry", "reject", "redirect", "slow", "oversize", "split", "exhaust"):
         config = {
             "endpoint": f"http://127.0.0.1:{receiver_port}",
             "source": source, "service": "gateway",
             "tags": {"env": "test", "team": "研发 space"},
-            "pipeline": "guance-log.p", "storage_index": "gateway_logs",
+            "pipeline": "datakit-log.p", "storage_index": "gateway_logs",
             "request_headers_allowlist": ["x-allowed"],
             "response_headers_allowlist": ["content-type"],
             "queue": {"max_batch_size": 1, "max_coalescing_delay": 0.2,
@@ -150,10 +150,10 @@ def main():
             "name": "service-" + source,
             "url": f"http://127.0.0.1:{receiver_port}/upstream",
             "routes": [{"name": "route-" + source, "paths": ["/" + source]}],
-            "plugins": [{"name": "guance-log", "config": config}],
+            "plugins": [{"name": "datakit-log", "config": config}],
         })
 
-    with tempfile.TemporaryDirectory(prefix="guance-log-test-") as tmp:
+    with tempfile.TemporaryDirectory(prefix="datakit-log-test-") as tmp:
         config_file = pathlib.Path(tmp) / "kong.json"
         config_file.write_text(json.dumps(configuration))
         config_file.chmod(0o644)
@@ -161,7 +161,7 @@ def main():
             "docker", "run", "-d", "--name", name, "--network", "host",
             "-v", f"{config_file}:/etc/kong/test.json:ro",
             "-e", "KONG_DATABASE=off", "-e", "KONG_DECLARATIVE_CONFIG=/etc/kong/test.json",
-            "-e", "KONG_PLUGINS=bundled,guance-log",
+            "-e", "KONG_PLUGINS=bundled,datakit-log",
             "-e", f"KONG_PROXY_LISTEN=127.0.0.1:{proxy_port}",
             "-e", f"KONG_ADMIN_LISTEN=127.0.0.1:{admin_port}",
             "-e", f"KONG_NGINX_WORKER_PROCESSES={args.workers}", "-e", "KONG_LOG_LEVEL=notice",
@@ -181,7 +181,7 @@ def main():
 
             wait_for(ready, "Kong startup", 30)
             enabled = json.loads(request(admin + "/plugins/enabled")[1])["enabled_plugins"]
-            assert "guance-log" in enabled
+            assert "datakit-log" in enabled
             print("PASS: real Kong loads schema and handler", flush=True)
 
             traceparent = "00-4bf92f3577b34da6a3ce929d0e0e4736-00f067aa0ba902b7-01"
@@ -200,7 +200,7 @@ def main():
                 assert event["body"].endswith(b"\n")
                 assert event["content_type"].startswith("text/plain")
                 assert event["query"]["tags"] == ["env=test,team=研发 space"]
-                assert event["query"]["pipeline"] == ["guance-log.p"]
+                assert event["query"]["pipeline"] == ["datakit-log.p"]
                 assert event["query"]["storage_index"] == ["gateway_logs"]
                 assert b"secret" not in event["body"]
             assert len({record["request_id"] for record in records("batch")}) == 30

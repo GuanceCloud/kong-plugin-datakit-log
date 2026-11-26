@@ -2,7 +2,15 @@
 
 Date: 2026-11-11 (Asia/Shanghai).
 
-## Completed
+## v0.1.1 rename validation (2026-11-26)
+
+- 71 unit/schema checks passed with the `datakit-log` module namespace.
+- Full integration suite passed on Kong 3.9.4 with two workers, including the renamed plugin and Pipeline parameter.
+- Installed Docker image integration suite and the rebuilt binary LuaRocks package passed installation/loading checks.
+- The renamed Pipeline passed the actual DataKit field and timestamp checks.
+- No `guance-log` runtime alias or legacy module directory is provided.
+
+## Historical v0.1.0 checks
 
 | Check | Result |
 | --- | --- |

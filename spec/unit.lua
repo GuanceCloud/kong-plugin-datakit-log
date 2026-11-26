@@ -2,10 +2,10 @@
 package.path = "./?.lua;" .. package.path
 
 local Schema = require "kong.db.schema"
-local definition = require "kong.plugins.guance-log.schema"
+local definition = require "kong.plugins.datakit-log.schema"
 local schema = assert(Schema.new(definition))
-local record = require "kong.plugins.guance-log.record"
-local transport = require "kong.plugins.guance-log.transport"
+local record = require "kong.plugins.datakit-log.record"
+local transport = require "kong.plugins.datakit-log.transport"
 local checks = 0
 local function check(value, message)
   assert(value, message)
@@ -100,13 +100,13 @@ check(record.build(serialized, conf).status == "warning", "HTTP 4xx is warning")
 conf.tags = { env = "prod", team = "研发 space" }
 conf.source = "kong custom"
 conf.service = "gateway"
-conf.pipeline = "guance-log.p"
+conf.pipeline = "datakit-log.p"
 conf.storage_index = "gateway_logs"
 local endpoint = transport.endpoint(conf)
 local query = ngx.decode_args(endpoint:match("%?(.*)$"))
 check(query.source == "kong custom", "source URL encoded")
 check(query.tags == "env=prod,team=研发 space", "tags stable and encoded")
-check(query.pipeline == "guance-log.p", "pipeline forwarded")
+check(query.pipeline == "datakit-log.p", "pipeline forwarded")
 check(query.storage_index == "gateway_logs", "index forwarded")
 conf.endpoint = "http://localhost:9529/v1/write/logstreaming"
 check(transport.endpoint(conf):match("/v1/write/logstreaming%?"), "full endpoint accepted without duplicate path")
@@ -158,7 +158,7 @@ end
 _G.kong.plugin = { get_id = function() return "plugin-1" end }
 _G.kong.log.serialize = function() return serialized end
 _G.kong.request = { get_header = function() return traceparent end }
-local handler = require "kong.plugins.guance-log.handler"
+local handler = require "kong.plugins.datakit-log.handler"
 local first_config = config({ endpoint = "http://localhost:9529" })
 handler:log(first_config.config)
 local second_config = config({ endpoint = "http://localhost:9529", source = "changed" })

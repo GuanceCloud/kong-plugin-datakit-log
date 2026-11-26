@@ -10,7 +10,7 @@
 | --- | --- | --- |
 | `endpoint` | 必填 | DataKit HTTP(S) 地址，允许完整 `/v1/write/logstreaming` 路径；不允许凭据、查询参数或 fragment |
 | `source` / `service` | 均为 `kong` | 日志来源及观测服务标签，后者与 Kong Service 实体名独立 |
-| `pipeline` | 无 | DataKit Pipeline 名称，例如 `guance-log.p` |
+| `pipeline` | 无 | DataKit Pipeline 名称，例如 `datakit-log.p` |
 | `storage_index` | 无 | 日志索引，以小写字母开头，仅含小写字母、数字及下划线 |
 | `tags` | `{}` | 自定义标签；值不允许逗号、等号和控制字符 |
 | `request_headers_allowlist` / `response_headers_allowlist` | `[]` | 请求头、响应头采集白名单，大小写不敏感 |

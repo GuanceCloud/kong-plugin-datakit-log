@@ -1,5 +1,5 @@
 local http = require "resty.http"
-local report = require "kong.plugins.guance-log.report"
+local report = require "kong.plugins.datakit-log.report"
 
 local _M = {}
 

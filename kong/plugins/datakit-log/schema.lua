@@ -33,7 +33,7 @@ local function validate_header(value)
 end
 
 return {
-  name = "guance-log",
+  name = "datakit-log",
   fields = {
     { protocols = typedefs.protocols_http },
     { config = {

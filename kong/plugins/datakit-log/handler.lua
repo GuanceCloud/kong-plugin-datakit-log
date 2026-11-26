@@ -1,14 +1,14 @@
 local cjson = require "cjson.safe"
 local Queue = require "kong.tools.queue"
-local record = require "kong.plugins.guance-log.record"
-local transport = require "kong.plugins.guance-log.transport"
-local report = require "kong.plugins.guance-log.report"
+local record = require "kong.plugins.datakit-log.record"
+local transport = require "kong.plugins.datakit-log.transport"
+local report = require "kong.plugins.datakit-log.report"
 
 -- Weak values as well as keys: runtime.config refers back to the key, and Lua
 -- 5.1 weak-key tables alone would retain obsolete configurations indefinitely.
 local runtimes = setmetatable({}, { __mode = "kv" })
 
-local GuanceLog = { PRIORITY = 10, VERSION = "0.1.0" }
+local DataKitLog = { PRIORITY = 10, VERSION = "0.1.1" }
 
 local function get_runtime(conf)
   local runtime = runtimes[conf]
@@ -22,8 +22,8 @@ local function get_runtime(conf)
   end
   -- New configuration gets a new queue so existing batches keep their original
   -- destination and transport options. No raw URL/tags appear in queue names.
-  queue.name = "guance-log:" .. kong.plugin.get_id() .. ":" .. ngx.md5(encoded)
-  queue.log_tag = "guance-log"
+  queue.name = "datakit-log:" .. kong.plugin.get_id() .. ":" .. ngx.md5(encoded)
+  queue.log_tag = "datakit-log"
   queue.concurrency_limit = 1
   runtime = { config = conf, endpoint = transport.endpoint(conf), queue = queue }
   runtimes[conf] = runtime
@@ -47,7 +47,7 @@ local function enqueue(conf)
   end
 end
 
-function GuanceLog.log(_, conf)
+function DataKitLog.log(_, conf)
   -- Logging must never fail a request, including when another plugin modifies
   -- the shared serialized log into an unexpected shape.
   local ok = pcall(enqueue, conf)
@@ -56,4 +56,4 @@ function GuanceLog.log(_, conf)
   end
 end
 
-return GuanceLog
+return DataKitLog

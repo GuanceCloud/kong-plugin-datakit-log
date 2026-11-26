@@ -11,7 +11,7 @@ return function(reason, count)
   end
   bucket.count = bucket.count + count
   if now >= bucket.next_report then
-    kong.log.err("guance-log dropped ", bucket.count, " entries: ", reason,
+    kong.log.err("datakit-log dropped ", bucket.count, " entries: ", reason,
                  "; further occurrences aggregated for 60s")
     bucket.count = 0
     bucket.next_report = now + 60
